@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControleBar.Modulo_Cliente;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,25 @@ namespace ControleBar.Modulo_Garcom
 {
     public class Repositorio_Garcom
     {
+        private static Repositorio_Garcom instance = null;
         private int contadorGarcom = 0;
         private ArrayList listaGarcom = new ArrayList();
+        public Repositorio_Garcom()
+        {
+            
+        }
+
+        public static Repositorio_Garcom Instancia
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Repositorio_Garcom();
+                }
+                return instance;
+            }
+        }
         internal void Inserir(Garcom garcom)
         {
             contadorGarcom++;

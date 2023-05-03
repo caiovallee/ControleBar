@@ -13,29 +13,28 @@ namespace ControleBar.Modulo_Conta
 {
     internal class TelaConta:TelaBase
     {
-        RepositorioConta repositorioConta = new RepositorioConta();
+        RepositorioConta repositorioConta =  RepositorioConta.Instancia;
         Tela_Cliente telaCliente = new Tela_Cliente();
-        RepositorioCliente repositorioCliente = new RepositorioCliente();
+        RepositorioCliente repositorioCliente = RepositorioCliente.Instancia;
         Tela_Mesa telaMesa = new Tela_Mesa();
-        Repositorio_Mesa repositorioMesa = new Repositorio_Mesa();
+        Repositorio_Mesa repositorioMesa = Repositorio_Mesa.Instancia;
         internal string ApresentarMenu()
         {
-            
-
             Console.Clear();
-            Console.WriteLine("Cadostro de Contas");
+            Console.WriteLine("Cadastro de Contas");
             Console.WriteLine();
             Console.WriteLine("Digite 1 para Inserir Conta");
             Console.WriteLine("Digite 2 para Visualizar Contas");
             Console.WriteLine("Digite 3 para Editar Contas");
             Console.WriteLine("Digite 4 para Excluir Conta");
-
+            Console.WriteLine("Digite 5 para Fechar Conta");
             Console.WriteLine("Digite s para sair");
 
             string opcaoConta = Console.ReadLine();
             return opcaoConta;
         }
 
+        public double valorTotal = 0;
         internal void EditarConta()
         {
             MostrarCabecalho("Cadostro de Contas", "Editando uma Conta já cadastrado...");
@@ -95,12 +94,12 @@ namespace ControleBar.Modulo_Conta
             Console.WriteLine("Digite o numero da Conta");
             int numero = int.Parse(Console.ReadLine());
             bool status = true;
-            Console.WriteLine("Digite o id do cliente que a conta pertence");
             telaCliente.VisualizarClientes(true);
+            Console.WriteLine("Digite o id do cliente que a conta pertence: ");
             int idCliente = int.Parse(Console.ReadLine());
             Cliente cliente = repositorioCliente.SelecionarPorId(idCliente);
-            Console.WriteLine("Digite o id da mesa que a conta pertence");
             telaMesa.VisualizarMesas(true);
+            Console.WriteLine("Digite o id da mesa que a conta pertence");
             int IdMesa = int.Parse(Console.ReadLine());
             Mesa mesa = repositorioMesa.SelecionarPorId(IdMesa);
             double consumo = 0;
@@ -111,14 +110,49 @@ namespace ControleBar.Modulo_Conta
         }
         private void MostrarTabela(ArrayList Contas)
         {
-            Console.WriteLine("{0, -10} | {1, -20}| {2, -20}| {3, -20}| {4, -20}| {5, -20}", "id", "numero","status","cliente","mesa","consumo");
-
-            Console.WriteLine("----------------------------------------------------------------------------------------");
+            Console.WriteLine("{0,-10} | {1,-20} | {2,-20} | {3,-20} | {4,-20} | {5,-20}", "id", "numero", "Aberta?", "cliente", "mesa", "consumo");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
             foreach (Conta conta in Contas)
             {
-                Console.WriteLine("{0, -10} | {1, -20} | { 2, -20}| { 3, -20}| { 4, -20}| { 5, -20}", conta.id, conta.numero,conta.status,conta.cliente,conta.mesa,conta.consumo);
+                Console.WriteLine("{0,-10} | {1,-20} | {2,-20} | {3,-20} | {4,-20} | {5,-20}", conta.id, conta.numero, conta.status, conta.cliente.nome, conta.mesa.numero, conta.consumo);
             }
-            Console.ReadLine();
+            
+        }
+    
+        internal void FecharConta()
+        {
+            MostrarCabecalho("Cadastro de Contas", "Fechando uma Conta já cadastrada...");
+
+            
+            VisualizarContas(true);
+
+            Console.WriteLine();
+            Console.WriteLine("Digite o id da Conta: ");
+            int id = int.Parse(Console.ReadLine());
+
+            
+            Conta conta = repositorioConta.SelecionarPorId(id);
+
+            
+            if (conta == null)
+            {
+                MostrarMensagem("Conta não encontrada", ConsoleColor.DarkYellow);
+                return;
+            }
+
+            
+            if (!conta.status)
+            {
+                MostrarMensagem("A conta já está fechada", ConsoleColor.DarkYellow);
+                return;
+            }
+
+            valorTotal += conta.consumo;
+            conta.consumo = 0;
+            conta.status = false;
+            repositorioConta.Editar(conta.id, conta);
+
+            MostrarMensagem("Conta fechada com sucesso", ConsoleColor.Green);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ControleBar.Compartilhado
      public class TelaBase
     {
         Repositorio_Garcom repositorioGarcom = new Repositorio_Garcom();
-       
+                                                 
 
         public string ApresentarMenu()
             {
@@ -21,7 +21,9 @@ namespace ControleBar.Compartilhado
                 Console.WriteLine("Digite [2] Mesas ");
                 Console.WriteLine("Digite [3] Produto");
                 Console.WriteLine("Digite [4] Clientes");
-                Console.WriteLine("Digite [5] Contas \n");
+                Console.WriteLine("Digite [5] Contas ");
+                Console.WriteLine("Digite [6] Pedidos");
+                Console.WriteLine("Digite [7] Faturacao Diaria");
 
                 Console.WriteLine("Digite s para sair");
 

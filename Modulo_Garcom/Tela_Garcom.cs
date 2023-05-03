@@ -10,13 +10,13 @@ namespace ControleBar.Modulo_Garcom
 {
     public class Tela_Garcom : TelaBase
     {
-        Repositorio_Garcom repositorioGarcom = new Repositorio_Garcom();
+        Repositorio_Garcom repositorioGarcom = Repositorio_Garcom.Instancia;
 
         internal string ApresentarMenu()
         {
 
             Console.Clear();
-            Console.WriteLine("Cadostro de Garcoms");
+            Console.WriteLine("Cadastro de Garcom");
             Console.WriteLine();
             Console.WriteLine("Digite 1 para Inserir Garcom");
             Console.WriteLine("Digite 2 para Visualizar Garcoms");
@@ -76,7 +76,7 @@ namespace ControleBar.Modulo_Garcom
         internal void inserirNovoGarcom()
         {
 
-            MostrarCabecalho("Cadostro de Garcoms", "Inserindo um novo Garcom");
+            MostrarCabecalho("Cadastro de Garcom", "Inserindo um novo Garcom");
 
             Garcom Garcom = ObterGarcom();
             repositorioGarcom.Inserir(Garcom);

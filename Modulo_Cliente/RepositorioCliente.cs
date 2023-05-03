@@ -6,14 +6,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ControleBar.Modulo_Cliente
 {
     public class RepositorioCliente
     {
-        
-            private int contadorCliente = 0;
-            private ArrayList listaCliente = new ArrayList();
-            internal void Inserir(Cliente Cliente)
+        private static RepositorioCliente instance = null;    
+
+            public int contadorCliente = 0;
+            public ArrayList listaCliente = new ArrayList();
+
+        private RepositorioCliente()
+        {
+            
+        }
+        public static RepositorioCliente Instancia
+        {
+            get{
+                if(instance == null)
+                {
+                    instance = new RepositorioCliente();
+                }
+                    return instance;               
+               }
+        }
+        internal void Inserir(Cliente Cliente)
             {
                 contadorCliente++;
 

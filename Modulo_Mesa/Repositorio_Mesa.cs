@@ -1,4 +1,5 @@
-﻿using ControleBar.Modulo_Mesa;
+﻿using ControleBar.Modulo_Cliente;
+using ControleBar.Modulo_Mesa;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,8 +11,23 @@ namespace ControleBar.Modulo_Mesa
 {
     public class Repositorio_Mesa
     {
+        private static Repositorio_Mesa instance = null;
         private int contadorMesa = 0;
         private ArrayList listaMesa = new ArrayList();
+        public Repositorio_Mesa()
+        {
+            
+        }
+        public static Repositorio_Mesa Instancia
+        {
+            get {
+                if(instance == null)
+                {
+                    instance = new Repositorio_Mesa();
+                }
+                return instance;
+            }
+        }
         internal void Inserir(Mesa Mesa)
         {
             contadorMesa++;

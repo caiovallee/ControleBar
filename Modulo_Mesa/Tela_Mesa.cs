@@ -12,7 +12,7 @@ namespace ControleBar.Modulo_Mesa
     internal class Tela_Mesa : TelaBase
     {
 
-        Repositorio_Mesa repositorioMesa = new Repositorio_Mesa();
+        Repositorio_Mesa repositorioMesa = Repositorio_Mesa.Instancia;
         internal string ApresentarMenu()
         {
 
@@ -101,7 +101,7 @@ namespace ControleBar.Modulo_Mesa
             {
                 Console.WriteLine("{0, -10} | {1, -20}", Mesa.id, Mesa.numero);
             }
-            Console.ReadLine();
+            
         }
     }
 }

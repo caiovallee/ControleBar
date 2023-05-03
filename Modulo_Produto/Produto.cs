@@ -10,7 +10,7 @@ namespace ControleBar.Modulo_Produto
     public class Produto
     {
         public int id;
-        public String nome;
+        public string nome;
         public double valor;
         
         public Produto(string nome,double valor)

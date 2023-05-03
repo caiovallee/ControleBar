@@ -11,7 +11,7 @@ namespace ControleBar.Modulo_Produto
 {
     internal class Tela_Produto : TelaBase
     {
-        Repositorio_Produto repositorioProduto = new Repositorio_Produto();
+        Repositorio_Produto repositorioProduto = Repositorio_Produto.Instancia;
         internal string ApresentarMenu()
         {
 
@@ -56,7 +56,7 @@ namespace ControleBar.Modulo_Produto
 
             }
             MostrarTabela(Produtos);
-            Console.ReadLine();
+           
 
         }
 
@@ -102,7 +102,7 @@ namespace ControleBar.Modulo_Produto
             {
                 Console.WriteLine("{0, -10} | {1, -20} | {2,-20}", Produto.id,Produto.nome,Produto.valor);
             }
-            Console.ReadLine();
+            
         }
     }
 }

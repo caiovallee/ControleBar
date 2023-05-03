@@ -10,8 +10,24 @@ namespace ControleBar.Modulo_Produto
 {
     internal class Repositorio_Produto
     {
+        private static Repositorio_Produto instance = null;
         private int contadorProduto = 0;
         private ArrayList listaProduto = new ArrayList();
+        public Repositorio_Produto()
+        {
+            
+        }
+        public static Repositorio_Produto Instancia
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new Repositorio_Produto();
+                }
+                return instance;
+            }
+        }
         internal void Inserir(Produto Produto)
         {
             contadorProduto++;

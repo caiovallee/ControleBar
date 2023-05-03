@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ControleBar.Modulo_Cliente
 {
-    internal class Tela_Cliente : TelaBase
+    public class Tela_Cliente : TelaBase
     {
-        RepositorioCliente repositorioCliente = new RepositorioCliente();
+        RepositorioCliente repositorioCliente = RepositorioCliente.Instancia;
         internal string ApresentarMenu()
         {
 
@@ -31,7 +31,7 @@ namespace ControleBar.Modulo_Cliente
 
         internal void EditarCliente()
         {
-            MostrarCabecalho("Cadostro de Clientes", "Editando uma Cliente já cadastrado...");
+            MostrarCabecalho("Cadastro de Clientes", "Editando uma Cliente já cadastrado...");
             VisualizarClientes(false);
             Console.WriteLine();
             Console.WriteLine("Digite o id do Cliente: ");
@@ -47,14 +47,10 @@ namespace ControleBar.Modulo_Cliente
         public void VisualizarClientes(bool mostrarCabecalho)
         {
             if (mostrarCabecalho)
-                MostrarCabecalho("Cadostro de Clientes", "Visualizando Clientes já cadastrados...");
+                MostrarCabecalho("Cadastro de Clientes", "Visualizando Clientes já cadastrados...");
 
             ArrayList Clientes = repositorioCliente.SelecionarTodos();
-            if (Clientes.Count == 0)
-            {
-                MostrarMensagem("nenhuma Cliente cadostrado", ConsoleColor.DarkYellow);
-
-            }
+            
             MostrarTabela(Clientes);
             Console.ReadLine();
 
@@ -100,7 +96,7 @@ namespace ControleBar.Modulo_Cliente
             {
                 Console.WriteLine("{0, -10} | {1, -20}", Cliente.id, Cliente.nome);
             }
-            Console.ReadLine();
+            
         }
     }
 }

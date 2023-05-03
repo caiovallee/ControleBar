@@ -1,4 +1,5 @@
-﻿using ControleBar.Modulo_Conta;
+﻿using ControleBar.Modulo_Cliente;
+using ControleBar.Modulo_Conta;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,8 +11,24 @@ namespace ControleBar.Modulo_Conta
 {
     internal class RepositorioConta
     {
+        private static RepositorioConta instance = null;
         private int contadorConta = 0;
         private ArrayList listaConta = new ArrayList();
+        public RepositorioConta()
+        {
+            
+        }
+        public static RepositorioConta Instancia
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new RepositorioConta();
+                }
+                return instance;
+            }
+        }
         internal void Inserir(Conta Conta)
         {
             contadorConta++;
